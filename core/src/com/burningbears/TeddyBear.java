@@ -9,11 +9,11 @@ import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 
 public class TeddyBear {
-	
+
 	// Class fields
 	Random rand = new Random();
 	boolean active = true;
-	
+
 	// Drawing support
 	Texture sprite;
 	Rectangle drawRectangle;
@@ -24,8 +24,6 @@ public class TeddyBear {
 	// bouncing support
 	int windowHeight;
 	int windowWidth;
-	
-	
 
 	// Class constructors
 
@@ -35,49 +33,49 @@ public class TeddyBear {
 		// TODO -
 		this.windowHeight = windowHeight;
 		this.windowWidth = windowWidth;
-		loadContent(spriteName, x, y);		
+		loadContent(spriteName, x, y);
 		int speed = rand.nextInt(5) + 3;
 		double angle = 2 * Math.PI * rand.nextDouble();
 		velocity.x = (float) (Math.cos(angle) * speed);
 		velocity.y = -1 * (float) (Math.sin(angle) * speed);
 
 	}
-	
+
 	public TeddyBear(String spriteName, int x, int y, int windowWidth,
-			int windowHeight, Vector2 velocity){
+			int windowHeight, Vector2 velocity) {
 		this.windowHeight = windowHeight;
 		this.windowWidth = windowWidth;
 		loadContent(spriteName, x, y);
 		this.velocity = velocity;
 	}
 
-	public boolean isActive(){
+	public boolean isActive() {
 		return active;
 	}
-	
+
 	public void setActive(boolean active) {
 		this.active = active;
 	}
-	
-	public Rectangle DrawRectangle(){
+
+	public Rectangle DrawRectangle() {
 		return this.drawRectangle;
 	}
 
 	public void update() {
-		if(isActive()){
-		drawRectangle.x += (int) (velocity.x);
-		drawRectangle.y += (int) (velocity.y);
+		if (isActive()) {
+			drawRectangle.x += (int) (velocity.x);
+			drawRectangle.y += (int) (velocity.y);
 
-		// bounce as necessary
-		bounceTopBottom();
-		bounceLeftRight();
+			// bounce as necessary
+			bounceTopBottom();
+			bounceLeftRight();
 		}
 	}
 
 	public void draw(SpriteBatch batch) {
-		if(isActive()){
-		batch.draw(sprite, drawRectangle.x, drawRectangle.y,
-				drawRectangle.width, drawRectangle.height);
+		if (isActive()) {
+			batch.draw(sprite, drawRectangle.x, drawRectangle.y,
+					drawRectangle.width, drawRectangle.height);
 		}
 	}
 

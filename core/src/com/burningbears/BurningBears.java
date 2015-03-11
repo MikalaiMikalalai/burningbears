@@ -26,11 +26,11 @@ public class BurningBears extends ApplicationAdapter {
 	@Override
 	public void create() {
 		batch = new SpriteBatch();
-		bear0 = new TeddyBear("teddybear0.png", 0, 0, Gdx.graphics.getWidth(),
-				Gdx.graphics.getHeight(), new Vector2(-5f, 0));
-		bear1 = new TeddyBear("teddybear1.png", 300, 0,
-				Gdx.graphics.getWidth(), Gdx.graphics.getHeight(),
-				new Vector2(5f, 0));
+		bear0 = new TeddyBear("teddybear0.png", 500, 300, Gdx.graphics.getWidth(),
+				Gdx.graphics.getHeight(), new Vector2(5f, 0));
+		bear1 = new TeddyBear("teddybear1.png", 300, 300,
+				Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), new Vector2(
+						-5f, 0));
 		explosion = new Explosion();
 	}
 
@@ -38,15 +38,20 @@ public class BurningBears extends ApplicationAdapter {
 		bear0.update();
 		bear1.update();
 		explosion.update();
-		if (bear0.isActive() && bear1.isActive() && bear0.drawRectangle.overlaps(bear1.drawRectangle))
-        {
+		if (bear0.isActive() && bear1.isActive()
+				&& bear0.drawRectangle.overlaps(bear1.drawRectangle)) {
 			Gdx.app.log("BurningBears", "bears overlapped");
-            bear0.setActive(false);
-            bear1.setActive(false);
-            Rectangle collisionRectangle = new Rectangle(Math.min(bear0.DrawRectangle().getX(), bear1.DrawRectangle().getX()),
-            		bear0.DrawRectangle().getY(), bear0.DrawRectangle().getWidth(), bear0.DrawRectangle().getHeight());
-            explosion.play(100, 100);            
-        }
+			bear0.setActive(false);
+			bear1.setActive(false);
+			Rectangle collisionRectangle = new Rectangle(bear0.DrawRectangle()
+					.getX() + bear0.DrawRectangle().getWidth(),
+					bear0.DrawRectangle().getY()
+							+ bear0.DrawRectangle().getHeight(), bear0
+							.DrawRectangle().getWidth(), bear0.DrawRectangle()
+							.getHeight());
+			explosion
+					.play(collisionRectangle.getX(), collisionRectangle.getY());
+		}
 	}
 
 	@Override
